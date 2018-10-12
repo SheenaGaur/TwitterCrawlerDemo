@@ -1,2 +1,2 @@
 # TwitterCrawlerDemo
-Demo project to test using Streaming API's of twitter
+Demo project to test using Streaming and REST API's of twitter
