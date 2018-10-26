@@ -13,10 +13,10 @@ import twitter4j.conf.ConfigurationBuilder;
 @Configuration
 public class SocialConfig {
 	
-	private final String consumerKey = "FGloTK9reggUWbwx1qfRFHq5b"; // The application's consumer key
-	private final String consumerSecret = "VUAPonY7mlXYzBy60LfXUDRmEt104HDjKC1LQj96s156OaHeuT"; // The application's consumer secret
-	private final String accessToken = "3032897395-cgVbPzfXp24Sqzzy8RqpgOCnGiilm0CS4IQazPA"; // The access token granted after OAuth authorization
-	private final String accessTokenSecret = "cfll3R5wEfKydgXdPhljFo1VtB05HXRArQaIWyVyr30KQ"; // The access token secret granted after OAuth authorization
+	private final String consumerKey = ""; // The application's consumer key
+	private final String consumerSecret = ""; // The application's consumer secret
+	private final String accessToken = ""; // The access token granted after OAuth authorization
+	private final String accessTokenSecret = ""; // The access token secret granted after OAuth authorization
 
 	@Bean
 	public twitter4j.conf.Configuration configuration(){
