@@ -82,4 +82,9 @@ public class TweetStatusService {
 		
 	    System.out.println("Total redundant data:"+count);
 	}
+	
+	public List<StatusDoc> getAllMergedTweets(){
+		List<StatusDoc> tweets = statusDalImpl.getAllFromMergedDoc();
+		return tweets;
+	}
 }

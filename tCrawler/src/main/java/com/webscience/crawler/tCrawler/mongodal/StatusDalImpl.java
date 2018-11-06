@@ -1,7 +1,9 @@
 package com.webscience.crawler.tCrawler.mongodal;
 
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +13,10 @@ import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Repository;
 
+import com.tumblr.jumblr.types.Post;
 import com.webscience.crawler.tCrawler.model.StatusDoc;
+import com.webscience.crawler.tCrawler.model.TumblrDoc;
+import com.webscience.crawler.tCrawler.utilities.TumblrService;
 
 import twitter4j.Place;
 import twitter4j.Status;
@@ -28,6 +33,9 @@ public class StatusDalImpl implements StatusDal {
 	private static final String STREAM_TOPIC_COLLECTION = "StreamTopicCollection";
 	private static final String REST_COLLECTION = "RestCollection";
 	private static final String MERGED_COLLECTION = "StreamRestMergedCollection";
+	private static final String TUMBLR_COLLECTION = "TumblrCollection";
+	
+	private int duplicateData = 0;
 
 	@Override
 	public Status addStreamStatus(Status status) {
@@ -193,6 +201,69 @@ public class StatusDalImpl implements StatusDal {
 			}
 		}
 		System.out.println("Documents merged into new Collection:" + MERGED_COLLECTION + " with duplicates:" + countDup);
+	}
+	
+	@Override
+	public List<StatusDoc> getAllFromMergedDoc() {
+		Query query = new Query();
+		query.addCriteria(Criteria.where("_id").exists(true));
+		query.fields().include("_id").include("text");
+		List<StatusDoc> statuses = mongoTemplate.find(query, StatusDoc.class, MERGED_COLLECTION);
+		return statuses;
+	}
+	
+	@Override
+	public void saveTumblrData(Post post){
+		TumblrDoc doc = new TumblrDoc(post);
+		try {
+			mongoTemplate.insert(doc, TUMBLR_COLLECTION);
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("Duplicate Data received...adding to duplicate count");
+			duplicateData++;
+		}
+	}
+	
+	@Override
+	public void saveTumblrList(List<Post> posts){
+		for (Post post : posts) {
+			saveTumblrData(post);
+		}
+	}
+	
+	@Override
+	public void countAllTumblrDocs(){
+		Query query = new Query();
+		query.addCriteria(Criteria.where("_id").exists(true));
+		long count = mongoTemplate.count(query, TUMBLR_COLLECTION);
+		System.out.println("Total Tumbr posts:" + count);
+	}
+	
+	@Override
+	public void getMaxNotesForPost(){
+		Query query = new Query();
+		query.addCriteria(Criteria.where("note_count").exists(true));
+		query.fields().include("note_count").include("blog_name");
+		List<TumblrDoc> notes = mongoTemplate.find(query, TumblrDoc.class, TUMBLR_COLLECTION);
+		TumblrDoc maxNoteDoc  = notes.get(0);
+		for (TumblrDoc tumblrDoc : notes) {
+			if(maxNoteDoc.getNote_count() < tumblrDoc.getNote_count())
+				maxNoteDoc = tumblrDoc;
+		}
+		System.out.println("Max note count in all the posts is:" + maxNoteDoc.getNote_count() + " and the author is "+ maxNoteDoc.getBlog_name());
+	}
+	
+	@Override
+	public List<TumblrDoc> getMaxOccuredTumblrBlog(){
+		Query query = new Query();
+		query.addCriteria(Criteria.where("_id").exists(true));
+		query.fields().include("blog_name");
+		List<TumblrDoc> posts = mongoTemplate.find(query, TumblrDoc.class, TUMBLR_COLLECTION);
+		return posts;
+	}
+	
+	public int getDuplicateData() {
+		return duplicateData;
 	}
 
 }

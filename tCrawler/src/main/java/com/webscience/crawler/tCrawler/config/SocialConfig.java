@@ -1,8 +1,8 @@
 package com.webscience.crawler.tCrawler.config;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Scope;
 
 import twitter4j.Twitter;
 import twitter4j.TwitterFactory;
@@ -17,7 +17,7 @@ public class SocialConfig {
 	private final String consumerSecret = ""; // The application's consumer secret
 	private final String accessToken = ""; // The access token granted after OAuth authorization
 	private final String accessTokenSecret = ""; // The access token secret granted after OAuth authorization
-
+	
 	@Bean
 	public twitter4j.conf.Configuration configuration(){
 		ConfigurationBuilder configurationBuilder = new ConfigurationBuilder();
@@ -36,4 +36,5 @@ public class SocialConfig {
 	    Twitter twitter = tf.getInstance();
 	    return twitter;
 	}
+	
 }
