@@ -1,4 +1,8 @@
-# -*- coding: utf-8 -*-
+
+# coding: utf-8
+
+# In[5]:
+
 
 #import pymongo
 import numpy as np
@@ -20,9 +24,6 @@ from sklearn.cluster import KMeans
  #   doc_text_vector[index,0] = document['_id']
   #  doc_text_vector[index,1] = document['text']
    # index = index + 1
-
-
-fig = plt.figure()  # create a new figure
 
 data = np.genfromtxt('vectors.csv', delimiter='\t')
 #print(data.shape)
@@ -48,6 +49,12 @@ labels_uq, counts = np.unique(labels[labels>=0], return_counts=True)
 np.savetxt("labels_uq.txt",labels_uq,newline = ' ',delimiter=',')
 np.savetxt("counts.txt",counts,newline = ' ',delimiter=',')
 
+fig = plt.figure(figsize=(10,7))  # create a new figure
 ax = fig.add_subplot(1, 1, 1) 
-
+ax.cla()
+ax.set_xlabel('Clusters')
+ax.set_ylabel('Tweets per Cluster')
+ax.grid('on')
+ax.set_title('Number of Tweets per Cluters')
 ax.bar(labels_uq,counts)
+
