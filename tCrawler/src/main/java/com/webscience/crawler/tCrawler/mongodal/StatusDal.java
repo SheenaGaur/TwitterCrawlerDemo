@@ -10,6 +10,12 @@ import com.webscience.crawler.tCrawler.model.TumblrDoc;
 import twitter4j.Place;
 import twitter4j.Status;
 
+/**
+ * Interface for Data Access layer class that directly interacts with the database.
+ * Method descriptions in the inherited class.
+ * @author Sheena Gaur
+ *
+ */
 public interface StatusDal {
 	
 	Status addStreamStatus(Status status);
@@ -44,6 +50,8 @@ public interface StatusDal {
 	
 	List<StatusDoc> getAllFromMergedDoc();
 	
+	List<StatusDoc> getAllDataMergedCollection();
+	
 	void saveTumblrData(Post post);
 	
 	void saveTumblrList(List<Post> posts);
@@ -53,4 +61,12 @@ public interface StatusDal {
 	void getMaxNotesForPost();
 	
 	List<TumblrDoc> getMaxOccuredTumblrBlog();
+	
+	List<StatusDoc> getGeoAndPlaceDataFromMergedList();
+	
+	List<StatusDoc> getHalfGeoAndPlaceDataFromMergedList();
+	
+	void deleteAllFromAllCollections();
+	
+	long getNumCount(float num);
 }

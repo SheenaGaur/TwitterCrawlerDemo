@@ -16,12 +16,19 @@ import twitter4j.URLEntity;
 import twitter4j.User;
 import twitter4j.UserMentionEntity;
 
+/**
+ * Model class for tweet object. Fields are similar to twitter4j Status class.
+ * Not all fields are used. Used by MongoDB to store tweet information to database.
+ * 
+ * @author Sheena Gaur
+ *
+ */
 @Document
 public class StatusDoc {
-
+	// Tweet fields.
 	private Date createdAt;
 	@Id
-    private long id;
+    private long id; // ID field.
 	
     private String text;
     private int displayTextRangeStart = -1;
@@ -47,11 +54,18 @@ public class StatusDoc {
     private User user = null;
     private Status quotedStatus;
     private long quotedStatusId = -1L;
+    private float cluster = -1; // Cluster field.
     
+    /**
+     * Default constructor. Needed by MongoDB.
+     */
     public StatusDoc() {
-		// TODO Auto-generated constructor stub
 	}
     
+    /**
+     * Parameterised Constructor. Used to create StatusDoc object from Twitter4j status object.
+     * @param status
+     */
     public StatusDoc(Status status) {
 		this.createdAt = status.getCreatedAt();
 		this.id = status.getId();
@@ -80,6 +94,7 @@ public class StatusDoc {
 		this.quotedStatusId = status.getQuotedStatusId();
 	}
     
+    // Getter and Setter methods of the data member of the class.
 	public Date getCreatedAt() {
 		return createdAt;
 	}
@@ -235,6 +250,14 @@ public class StatusDoc {
 	}
 	public void setQuotedStatusId(long quotedStatusId) {
 		this.quotedStatusId = quotedStatusId;
+	}
+
+	public float getCluster() {
+		return cluster;
+	}
+
+	public void setCluster(float cluster) {
+		this.cluster = cluster;
 	}
     
 }

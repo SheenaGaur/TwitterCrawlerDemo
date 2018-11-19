@@ -29,8 +29,6 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-mongodb</artifactId>
 		</dependency>
-		<!-- <dependency> <groupId>org.springframework.boot</groupId> <artifactId>spring-boot-starter-web</artifactId> 
-			</dependency> -->
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -44,11 +42,9 @@
 			<version>4.0.6</version>
 		</dependency>
 
-		<dependency>
-			<groupId>info.debatty</groupId>
-			<artifactId>java-lsh</artifactId>
-			<version>0.10</version>
-		</dependency>
+		<!-- <dependency> <groupId>info.debatty</groupId> 
+		     <artifactId>java-lsh</artifactId> 
+			<version>0.10</version> </dependency> -->
 		<!-- https://mvnrepository.com/artifact/org.python/jython -->
 		<dependency>
 			<groupId>org.python</groupId>
@@ -60,19 +56,14 @@
 			<artifactId>jumblr</artifactId>
 			<version>0.0.13</version>
 		</dependency>
-		<!-- <dependency> <groupId>org.springframework.social</groupId> <artifactId>spring-social-facebook</artifactId> 
-			</dependency> <dependency> <groupId>org.springframework.boot</groupId> <artifactId>spring-boot-starter-thymeleaf</artifactId> 
-			</dependency> -->
-		<!-- <dependency>
-			<groupId>com.github.scribejava</groupId>
-			<artifactId>scribejava-core</artifactId>
-			<version>6.0.0</version>
+		<dependency>
+			<groupId>net.sourceforge.htmlunit</groupId>
+			<artifactId>htmlunit</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>com.github.scribejava</groupId>
-			<artifactId>scribejava-apis</artifactId>
-			<version>6.0.0</version>
-		</dependency> -->
+			<groupId>com.sun.mail</groupId>
+			<artifactId>javax.mail</artifactId>
+		</dependency>
 	</dependencies>
 
 	<build>

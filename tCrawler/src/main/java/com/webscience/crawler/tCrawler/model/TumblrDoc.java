@@ -9,12 +9,19 @@ import com.tumblr.jumblr.types.Note;
 import com.tumblr.jumblr.types.Post;
 import com.tumblr.jumblr.types.Post.PostType;
 
+/**
+ * Model class for Tumblr posts that are to be stored in the database.
+ * The fields are similar to jumblr Pot class except that all fields are not used.
+ * This class is used by MongoDB to store  Posts in the database.
+ * @author Sheena Gaur
+ *
+ */
 @Document
 public class TumblrDoc {
-
+	// Class data members
 	protected PostType type;
 	@Id
-    private Long id;
+    private Long id; // Post ID
     private String author;
     private String blog_name;
     private String post_url;
@@ -28,10 +35,16 @@ public class TumblrDoc {
     private Long note_count;
     private List<Note> notes;
 	
+    /**
+     * Default constructor. Needed by MongoDB.
+     */
 	public TumblrDoc() {
-		// TODO Auto-generated constructor stub
 	}
 	
+	/**
+	 * Parameterised constructor. Takes jumblr Post object and convert it into TumblrDoc.
+	 * @param post
+	 */
 	public TumblrDoc(Post post){
 		this.id = post.getId();
 		this.author = post.getAuthorId();
@@ -48,6 +61,7 @@ public class TumblrDoc {
 		this.notes = post.getNotes();
 	}
 
+	//Getters and Setters of the data members.
 	public PostType getType() {
 		return type;
 	}
