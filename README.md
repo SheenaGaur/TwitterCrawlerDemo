@@ -1,2 +1,2 @@
 # TwitterCrawlerDemo
-Demo project to test using Streaming and REST API's of twitter
+Web Science project to crawl twitter using Steaming and REST API's. Project created as part of course-work for Web Science under the University of Glasgow.
